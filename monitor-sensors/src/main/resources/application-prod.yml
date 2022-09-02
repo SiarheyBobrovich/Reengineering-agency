@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    username: postgres # Пользователь
+    password: 172143 # Пороль
+    url: jdbc:postgresql://db:5432/monitor?currentSchema=sensor
+    driver-class-name: org.postgresql.Driver
+  mvc:
+    view:
+      prefix: /WEB-INF/jsp/
+      suffix: .jsp
+    pathmatch:
+      matching-strategy: ant_path_matcher
+springfox:
+  documentation:
+    open-api:
+      v3:
+        path: /api-docs
+server:
+  port: 80

@@ -1,0 +1,4 @@
+*.class
+*.jar
+monitor-sensors/target
+.idea

@@ -1,0 +1,39 @@
+version: '3.5'
+services:
+  db:
+    build: postgresql
+    image: monitor_postgresql:1.0.0
+    restart: always
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 172143
+    volumes:
+      - /docker-entrypoint-initdb.d
+    networks:
+      - monitor_ntwrk
+  pgadmin:
+    build: pgadmin
+    image: monitor_pgadmin:1.0.0
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.admin
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "82:80"
+    networks:
+      - monitor_ntwrk
+  monitor-sensors:
+    build: monitor-sensors
+    image: monitor_sensors:1.0.0
+    networks:
+      - monitor_ntwrk
+  proxy:
+    build: proxy
+    image: monitor_proxy:1.0.0
+    ports:
+      - "80:80"
+    networks:
+      - monitor_ntwrk
+networks:
+  monitor_ntwrk:
+      name: monitor_ntwrk
